@@ -5,9 +5,12 @@ const productRoutes = require('./routes/productRoutes');
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
-// endpoint for healtcheck
+// Naikkan batas ukuran payload/body menjadi 3mb agar muat untuk image 2MB (Base64)
+app.use(express.json({ limit: '3mb' }));
+app.use(express.urlencoded({ limit: '3mb', extended: true }));
+
+// endpoint for healthcheck
 app.get('/health', (req, res) => {
     res.json({
         status: "ok",
@@ -17,7 +20,7 @@ app.get('/health', (req, res) => {
 
 app.use("/products", productRoutes);
 
-// uknown path
+// unknown path
 app.use((req, res) => {
     res.status(404).json({
         message: "Endpoint tidak dikenal"

@@ -1,6 +1,29 @@
 const productModel = require('../models/productModel');
 
-// GET ambil semua products (yang sudah Anda buat)
+// Fungsi helper/pendukung untuk memvalidasi image Base64
+function validateImage(image) {
+    // 1. Cek jika field image kosong atau tidak dikirim
+    if (!image) {
+        return "Field image wajib diisi";
+    }
+
+    // 2. Cek format Base64 yang valid (Regex & panjang habis dibagi 4)
+    const base64Regex = /^[A-Za-z0-9+/]+={0,2}$/;
+    if (!base64Regex.test(image) || image.length % 4 !== 0) {
+        return "Field image harus berupa Base64 yang valid";
+    }
+
+    // 3. Cek ukuran hasil decode (maksimal 2 MB = 2 * 1024 * 1024 byte)
+    const imageBuffer = Buffer.from(image, 'base64');
+    const maxSize = 2 * 1024 * 1024; 
+    if (imageBuffer.length > maxSize) {
+        return "Ukuran image maksimal 2 MB";
+    }
+
+    return null; // Berarti valid (tidak ada error)
+}
+
+// GET ambil semua products
 async function index(req, res) {
     try {
         const products = await productModel.getAllProducts();
@@ -43,6 +66,14 @@ async function show(req, res) {
 // 2. POST - Create Product
 async function store(req, res) {
     try {
+        const { image } = req.body;
+
+        // Jalankan validasi image
+        const validationError = validateImage(image);
+        if (validationError) {
+            return res.status(400).json({ message: validationError });
+        }
+
         const newProductData = req.body;
         const createdProduct = await productModel.createProduct(newProductData);
 
@@ -62,8 +93,15 @@ async function store(req, res) {
 async function update(req, res) {
     try {
         const { id } = req.params;
+        const { image } = req.body;
+
+        // Jalankan validasi image (jika di-update, pastikan image-nya juga valid)
+        const validationError = validateImage(image);
+        if (validationError) {
+            return res.status(400).json({ message: validationError });
+        }
+
         const updateData = req.body;
-        
         const updatedProduct = await productModel.updateProduct(id, updateData);
 
         if (!updatedProduct) {
@@ -107,7 +145,6 @@ async function destroy(req, res) {
     }
 }
 
-// Jangan lupa export semua fungsi agar bisa dipakai di routes
 module.exports = {
     index,
     show,
