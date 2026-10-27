@@ -47,3 +47,7 @@ desktop.ini
 .git-backup/
 
 review-service-backup/
+
+# === Postman collection (bukan bagian penilaian) ===
+.postman/
+postman/
