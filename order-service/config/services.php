@@ -35,4 +35,14 @@ return [
         ],
     ],
 
+    'product' => [
+        'url'     => env('PRODUCT_SERVICE_URL', 'http://product-service:3000'),
+        'timeout' => (int) env('SERVICE_TIMEOUT', 5),
+    ],
+
+    'cart' => [
+        'url'     => env('CART_SERVICE_URL', 'http://cart-service:3002'),
+        'timeout' => (int) env('SERVICE_TIMEOUT', 5),
+    ],
+
 ];
