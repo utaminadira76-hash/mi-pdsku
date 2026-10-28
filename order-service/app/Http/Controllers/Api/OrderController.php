@@ -116,4 +116,35 @@ class OrderController extends Controller
             'data'    => $orders,
         ], 200);
     }
+
+    public function pay($id): JsonResponse
+    {
+        if (!ctype_digit((string) $id)) {
+            return response()->json([
+                'message' => "Pesanan dengan id {$id} tidak ditemukan",
+            ], 404);
+        }
+
+        $order = Order::with('items')->find((int) $id);
+
+        if (!$order) {
+            return response()->json([
+                'message' => "Pesanan dengan id {$id} tidak ditemukan",
+            ], 404);
+        }
+
+        if ($order->status !== 'PENDING') {
+            return response()->json([
+                'message' => "Pesanan berstatus {$order->status}, hanya pesanan PENDING yang dapat dibayar",
+            ], 409);
+        }
+
+        $order->status = 'PAID';
+        $order->save();
+
+        return response()->json([
+            'message' => 'Pesanan berhasil dibayar',
+            'data'    => $order,
+        ], 200);
+    }
 }
