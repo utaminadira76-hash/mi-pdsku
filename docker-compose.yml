@@ -81,7 +81,7 @@ services:
       - DB_USERNAME=order_user
       - DB_PASSWORD=secret
       - PRODUCT_SERVICE_URL=http://product-service:3000
-      - CART_SERVICE_URL=http://cart-service:3002
+      - CART_SERVICE_URL=http://cart-service:3002/api
       - SERVICE_TIMEOUT=5
     depends_on:
       order-db:

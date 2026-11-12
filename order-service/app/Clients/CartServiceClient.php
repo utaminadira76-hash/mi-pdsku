@@ -11,7 +11,7 @@ class CartServiceClient
 {
     public function getCart(int $userId): array
     {
-        $url = rtrim(config('services.cart.url'), '/') . "/carts/{$userId}";
+        $url = "http://cart-service:3002/api/carts/{$userId}";
 
         try {
             $response = Http::timeout(config('services.cart.timeout'))
@@ -40,7 +40,7 @@ class CartServiceClient
 
     public function clearCart(int $userId): void
     {
-        $url = rtrim(config('services.cart.url'), '/') . "/carts/{$userId}";
+        $url = "http://cart-service:3002/api/carts/{$userId}";
 
         try {
             $response = Http::timeout(config('services.cart.timeout'))
