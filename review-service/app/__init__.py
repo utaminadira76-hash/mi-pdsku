@@ -1,8 +1,8 @@
-# app/__init__.py
 import logging
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 from app.database import init_db
 from app.routes.review_routes import review_bp
@@ -11,6 +11,7 @@ from app.routes.review_routes import review_bp
 def create_app():
     load_dotenv()
     app = Flask(__name__)
+    CORS(app)  # <--- TAMBAHAN: izinkan browser dari origin lain memanggil API ini
     app.logger.setLevel(logging.INFO)
 
     init_db()

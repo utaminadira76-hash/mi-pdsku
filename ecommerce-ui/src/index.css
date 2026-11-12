@@ -1,0 +1,371 @@
+/* Import font modern dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Palet warna baru yang lebih segar */
+  --primary: #4f46e5;      /* Indigo modern */
+  --primary-hover: #4338ca;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --bg-body: #f1f5f9;      /* Abu-abu kebiruan yang lembut */
+  --bg-card: #ffffff;
+  --border: #e2e8f0;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-body);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* --- Navbar --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--bg-card);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar strong {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-right: 1rem;
+}
+
+.navbar a {
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar a.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.navbar .user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.navbar select {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: white;
+  font-family: inherit;
+  outline: none;
+}
+
+/* --- Container Utama --- */
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* --- Grid Produk --- */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+/* --- Kartu Produk --- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.card h2 a {
+  color: var(--text-main);
+}
+
+.card h2 a:hover {
+  color: var(--primary);
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0.5rem 0 1rem;
+}
+
+/* --- Bintang & Teks Muted --- */
+.stars {
+  color: #f59e0b;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* --- Tombol --- */
+button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Alert (Pesan Error/Sukses) --- */
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.alert-error {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid #fecaca;
+}
+
+.alert-success {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid #a7f3d0;
+}
+
+/* --- Aksi Detail Produk --- */
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  align-items: center;
+}
+
+.actions input {
+  width: 5rem;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+}
+
+.actions input:focus {
+  border-color: var(--primary);
+}
+
+/* --- Tabel Keranjang --- */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Tombol +/- di keranjang */
+td button {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+td button:hover:not(:disabled) {
+  background: var(--border);
+}
+
+.qty {
+  display: inline-block;
+  min-width: 2.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.total {
+  font-size: 1.25rem;
+  text-align: right;
+  margin: 1.5rem 0;
+}
+
+.total strong {
+  color: var(--primary);
+}
+
+/* --- Daftar Review --- */
+.reviews {
+  padding: 0;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.reviews li {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.reviews p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* --- Form Review --- */
+.form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.form label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form select, .form textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form select:focus, .form textarea:focus {
+  border-color: var(--primary);
+}
+
+/* Paksa jarak menu agar tidak dempet */
+.navbar nav .nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2.5rem !important; /* Jarak antar menu */
+  margin-left: 1.5rem !important; /* Jarak dari logo */
+}
+
+.navbar nav .nav-links a {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-block !important;
+}
